@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbourline Creative: Case Facilitation Runbook</title>
+<style>
+:root{--bg:#eef3f4;--card:#fff;--ink:#0f2b36;--mut:#4d6670;--teal:#1b6b7a;--rope:#b88a3e;--sig:#c93d22;--line:#cfdce0}
+@media (prefers-color-scheme:dark){:root{--bg:#0c1d24;--card:#132a33;--ink:#e6f0f2;--mut:#9db4bb;--teal:#5fb3c2;--rope:#d9b06a;--sig:#ff7a5c;--line:#28434d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif}
+header{background:var(--ink);color:#eef3f4;padding:28px 20px 22px}
+header .w,main{max-width:860px;margin:0 auto}
+h1{font:700 clamp(1.7rem,4vw,2.4rem)/1.15 Georgia,"Iowan Old Style",serif;margin:0 0 6px}
+header p{margin:0;color:#b9ced4;max-width:62ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 20px}
+.bar .w{max-width:860px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.clock{font:700 1.5rem Georgia,serif;font-variant-numeric:tabular-nums;min-width:4.6ch}
+button{font:inherit;cursor:pointer;border:1px solid var(--teal);background:transparent;color:var(--teal);padding:6px 14px;border-radius:6px}
+button.p{background:var(--teal);color:#fff}
+button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--rope);outline-offset:2px}
+.sp{flex:1}
+main{padding:22px 20px 60px}
+h2{font:700 1.25rem Georgia,serif;margin:28px 0 10px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:.93rem}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+.wrap{overflow-x:auto}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.chain span{padding:4px 10px;border:1px dashed var(--mut);border-radius:20px;font-size:.85rem;color:var(--mut)}
+.chain span.on{border:1px solid var(--teal);background:var(--teal);color:#fff}
+details{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:6px;margin:10px 0}
+details[open]{border-left-color:var(--rope)}
+summary{cursor:pointer;padding:12px 14px;display:flex;gap:12px;align-items:baseline;list-style:none}
+summary::-webkit-details-marker{display:none}
+.n{font:700 1.1rem Georgia,serif;color:var(--teal);min-width:1.6ch}
+.t{font-weight:600;flex:1}
+.m{color:var(--mut);font-size:.9rem}
+.b{padding:2px 16px 16px 16px}
+.b h3{font-size:.95rem;margin:14px 0 4px;color:var(--teal)}
+.b ul,.b ol{margin:0;padding-left:1.25rem}
+.b li{margin:3px 0}
+.say{border-left:3px solid var(--sig);padding:2px 10px;margin:8px 0;color:var(--mut);font-style:italic}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.row label{color:var(--mut);font-size:.9rem}
+.cd{font:700 1.2rem Georgia,serif;font-variant-numeric:tabular-nums}
+.cd.late{color:var(--sig)}
+.note{font-size:.88rem;color:var(--mut);margin-top:30px;border-top:1px solid var(--line);padding-top:12px}
+.flag{background:var(--card);border:1px solid var(--rope);border-radius:6px;padding:10px 14px;font-size:.92rem;margin-top:16px}
+@media (prefers-reduced-motion:no-preference){details[open] .b{animation:o .18s ease-out}@keyframes o{from{opacity:.4}to{opacity:1}}}
+@media print{.bar,button{display:none}details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<h1>Harbourline Creative: case facilitation runbook</h1>
+<p>BADM 470 · 90-minute class facilitation built on the abbreviated case analysis process (Chapter 2). Solve first, facilitate second: the class does the thinking.</p>
+<p style="margin-top:10px"><a href="slides.html" style="color:#d9b06a">Open the class-facing slides</a> (project these; keep this page on your own screen)</p>
+</div></header>
+
+<div class="bar"><div class="w">
+<span class="clock" id="clock" aria-live="off">0:00</span>
+<button class="p" id="go">Start session clock</button>
+<button id="rs">Reset</button>
+<span class="sp"></span>
+<button id="dl">Download notes</button>
+</div></div>
+
+<main>
+<h2>Run of show</h2>
+<div class="wrap"><table><thead><tr><th>Start</th><th>Segment</th><th>Min</th><th>Lead</th><th>Class output</th></tr></thead><tbody id="ros"></tbody></table></div>
+
+<h2>Line of sight</h2>
+<p style="margin:0;color:var(--mut)">Each link lights up once the team has captured the class’s output for it. Gaps show where the logic would break.</p>
+<div class="chain" id="chain"></div>
+
+<h2>Segments</h2>
+<div id="seg"></div>
+
+<div class="flag"><strong>Before class:</strong> this plan is drawn from the individual analysis only. Check every fact below against the case text, including the client counts (15 recurring content, 9 strategic advice, 6 wanting both, out of 24 interviewed) and the three-week, no-hiring, no-layoffs constraints. Replace “Member 1–4” with your team’s names and compare your four individual analyses before locking the flow.</div>
+
+<p class="note">AI use: this runbook was drafted with Claude (Anthropic) as a support tool and must be reviewed and verified against the case and Chapter 2 (Anderson, Buengel, &amp; Simpson, 2025). Cite AI use in your submission as the assignment instructions require.</p>
+</main>
+
+<script>
+const S=[
+{t:`What the case says`,k:`Case check`,m:15,o:`A shared, evidence-based picture of what Harbourline does and who it serves`,
+ pu:`Confirm the class read the case and understands the business before any analysis. Ask, don’t tell.`,
+ a:[`Ask each group: what does Harbourline actually do? Type each group’s answer in its box. Repeated answers are fine.`,`Ask: who are its clients and what are they buying?`,`Run the two quick checks (tourism client question; true or false) and let groups argue before you reveal.`,`Run the poll: would you buy at the current fee? Revisit it at the close.`],
+ q:[`Where in the case did you find that?`,`Is that something the case says, or something you assume about marketing agencies?`,`What does a client get from Harbourline that is more than content?`,`Which clients want content, which want advice, and which want both?`]},
+{t:`Numbers`,k:`Performance`,m:6,o:`What the numbers do and don’t show`,
+ pu:`First of three performance lenses. Establish what evidence of results exists.`,
+ a:[`Ask: what do the numbers tell us about how Harbourline is performing?`,`Collect each group’s answer.`],
+ q:[`Is that a measure or an anecdote?`,`Reports show reach, clicks and engagement. Do those show customer results?`,`What numbers are missing, and what can we not conclude without them?`]},
+{t:`Competition and customers`,k:`Performance`,m:7,o:`Competitor and customer evidence, tagged`,
+ pu:`Second lens. Who Harbourline competes with and what its customers say and do.`,
+ a:[`Ask: what do we know about competition and about customers? Tag each answer.`],
+ q:[`Who counts as a competitor now that clients can use AI themselves?`,`Different people in a client company want different things. Who is the real buyer?`,`Does interest in the interviews equal willingness to pay?`]},
+{t:`External factors`,k:`Performance`,m:7,o:`The outside forces that matter, with reasons`,
+ pu:`Third lens. Let the class name the outside forces without being given a framework.`,
+ a:[`Ask: which external factors are shaping Harbourline’s situation?`,`Ask groups to rank the ones that matter most and say why.`],
+ q:[`Is that a force outside the firm or a choice inside it?`,`Which of these will still matter in three years?`]},
+{t:`Resources and capabilities`,k:`Internal`,m:7,o:`Strengths and weaknesses the class derived`,
+ pu:`Let the class discover which resources are hard to copy. Do not hand them a framework.`,
+ a:[`Ask: what does Harbourline do well, and where does it fall short? Tag each answer.`,`Hint if stuck: what could a competitor, or a client with AI, not easily copy?`],
+ q:[`Why couldn’t someone copy that?`,`Where does that knowledge sit: in the firm, or in individuals?`,`Is this a strength today or only potentially?`]},
+{t:`Build the full SWOT`,k:`SWOT`,m:8,o:`A complete, evidence-backed SWOT on screen`,
+ pu:`The class builds all four quadrants from what it already found, not just one.`,
+ a:[`Pick the answering group, then type answers into the matching quadrant. Repeats are fine.`,`Strike anything without a case fact behind it.`,`Check that findings from the earlier slides appear somewhere.`],
+ q:[`What is the evidence for that item?`,`Is that an internal weakness or an external threat?`,`Which finding from earlier is missing from the SWOT?`]},
+{t:`What is the SWOT telling us?`,k:`SWOT`,m:4,o:`The class’s reading of the SWOT as a whole`,
+ pu:`Move from lists to meaning. Hint with questions, don’t answer for them.`,
+ a:[`Ask the question. If stuck, hint: where do strengths meet opportunities? What do the weaknesses and threats expose?`],
+ q:[`What pattern do you see across the four boxes?`,`What is the biggest tension?`]},
+{t:`Concerns`,k:`Concerns`,m:4,o:`The most serious concerns and why`,
+ pu:`Let the class prioritise.`,
+ a:[`Ask: which concerns are most serious, and why?`],
+ q:[`How strongly does that affect the firm?`,`How directly does it connect to the situation?`,`Which concern, if solved, makes the others easier?`]},
+{t:`Strategic issue`,k:`Strategic issue`,m:5,o:`One agreed statement of the central issue`,
+ pu:`The class states the issue. The issue is a decision, not a solution.`,
+ a:[`Ask: what is the central strategic issue Harbourline faces?`,`Collect each group’s version, then ask the room which is closest.`],
+ q:[`Does that statement already hide an answer?`,`Does it come from the concerns we just ranked?`,`What constraints should it include?`]},
+{t:`Alternatives`,k:`Alternatives`,m:8,o:`Options the class generated, with trade-offs`,
+ pu:`Class generates options. You do not supply a list.`,
+ a:[`Ask: what could Harbourline do about it? Tag answers as option, benefit, risk or assumption.`],
+ q:[`What has to be true for that to work?`,`Does it fit the constraints in the issue?`,`What does the evidence say against it?`]},
+{t:`Which would you choose?`,k:`Choose`,m:6,o:`Each group’s choice and its evidence`,
+ pu:`Each group commits and defends with case evidence.`,
+ a:[`Ask each group to choose one option and cite its evidence.`,`Ask the room what the weakest assumption is.`],
+ q:[`What would make you change your choice?`,`What would a finance manager, an owner and a coordinator each say?`]},
+{t:`Our recommendation`,k:`Our recommendation`,m:5,o:`Our recommendation defended with evidence`,
+ pu:`Now it is your turn. Present your own recommendation after the class has committed to theirs, and defend it with the same evidence standard.`,
+ a:[`Show the slide and say where your view agrees with and differs from the class.`,`Explain the logic from evidence to recommendation.`,`Edit the text on the slide beforehand so it matches your analysis.`],
+ q:[`What evidence does this rest on?`,`What would change our minds?`]},
+{t:`Challenge us`,k:`Challenge`,m:3,o:`Strongest objections and gaps in our logic`,
+ pu:`Invite challenge. Model how to respond to evidence.`,
+ a:[`Ask: what would you challenge in our recommendation?`,`Answer with evidence, or concede what we don’t know.`],
+ q:[`Where could the logic fail?`,`What do we still not know?`]},
+{t:`Closing`,k:`Close`,m:5,o:`Takeaways and open questions`,
+ pu:`Consolidate learning. Revisit the opening poll.`,
+ a:[`Revisit the poll: would you buy at the current fee now?`,`Ask what the class got right and what they would test next.`,`Close on: separate evidence from interpretation, build line of sight, name uncertainty.`],
+ q:[`How did your view change?`],
+ say:`The goal was visible, coherent and defensible reasoning.`}
+];
+
+const KEY="hl-fac-";
+const ld=k=>{try{return localStorage.getItem(KEY+k)||""}catch(e){return""}};
+const sv=(k,v)=>{try{localStorage.setItem(KEY+k,v)}catch(e){}};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const fmt=s=>Math.floor(s/60)+":"+String(Math.abs(s)%60).padStart(2,"0");
+let at=0;
+const ros=document.getElementById("ros"),seg=document.getElementById("seg"),chain=document.getElementById("chain");
+S.forEach((s,i)=>{
+ ros.insertAdjacentHTML("beforeend",`<tr><td>${fmt(at*60)}</td><td>${s.k==="Setup"?"":s.k+": "}${s.t}</td><td>${s.m}</td><td id="rl${i}">–</td><td>${s.o}</td></tr>`);
+ at+=s.m;
+ seg.insertAdjacentHTML("beforeend",`<details id="d${i}"><summary><span class="n">${i}</span><span class="t">${s.t}</span><span class="m">${s.m} min</span></summary><div class="b">
+ <h3>Purpose</h3><p style="margin:0">${s.pu}</p>
+ ${s.say?`<div class="say">${s.say}</div>`:""}
+ <h3>Activity</h3><ol>${s.a.map(x=>`<li>${x}</li>`).join("")}</ol>
+ <h3>Probing questions</h3><ul>${s.q.map(x=>`<li>${x}</li>`).join("")}</ul>
+ <h3>Expected output</h3><p style="margin:0">${s.o}</p>
+ <div class="row"><label for="l${i}">Lead</label><input type="text" id="l${i}" placeholder="Member 1–4" style="max-width:220px">
+ <button data-t="${i}">Start ${s.m}:00 timer</button><span class="cd" id="c${i}"></span></div>
+ <h3>Capture the class’s output</h3><textarea id="n${i}" aria-label="Class output for ${s.t}"></textarea></div></details>`);
+});
+document.getElementById("ros").insertAdjacentHTML("beforeend",`<tr><td></td><td><strong>Total</strong></td><td><strong>${at}</strong></td><td></td><td></td></tr>`);
+const links=S.slice(1,S.length-1);
+function paint(){
+ chain.innerHTML=links.map((s,j)=>`<span class="${ld("n"+(j+1)).trim()?"on":""}">${s.t}</span>`).join("<b aria-hidden='true'>›</b>");
+}
+S.forEach((s,i)=>{
+ const n=document.getElementById("n"+i),l=document.getElementById("l"+i);
+ n.value=ld("n"+i);l.value=ld("l"+i);
+ if(l.value)document.getElementById("rl"+i).textContent=l.value;
+ n.addEventListener("input",()=>{sv("n"+i,n.value);paint()});
+ l.addEventListener("input",()=>{sv("l"+i,l.value);document.getElementById("rl"+i).textContent=l.value||"–"});
+});
+paint();
+let ti=null,tl=0,tid=null;
+seg.addEventListener("click",e=>{
+ const b=e.target.closest("button[data-t]");if(!b)return;
+ const i=+b.dataset.t,c=document.getElementById("c"+i);
+ if(tid===i){clearInterval(ti);tid=null;b.textContent=`Start ${S[i].m}:00 timer`;return}
+ clearInterval(ti);document.querySelectorAll("button[data-t]").forEach(x=>x.textContent=`Start ${S[+x.dataset.t].m}:00 timer`);
+ tl=S[i].m*60;tid=i;b.textContent="Pause timer";
+ const tick=()=>{c.textContent=(tl<0?"+":"")+fmt(tl);c.className="cd"+(tl<0?" late":"");tl--};
+ tick();ti=setInterval(tick,1000);
+});
+let sc=0,si=null;
+const clk=document.getElementById("clock"),go=document.getElementById("go");
+go.onclick=()=>{
+ if(si){clearInterval(si);si=null;go.textContent="Resume session clock";return}
+ si=setInterval(()=>{sc++;clk.textContent=fmt(sc)},1000);go.textContent="Pause session clock";
+};
+document.getElementById("rs").onclick=()=>{clearInterval(si);si=null;sc=0;clk.textContent="0:00";go.textContent="Start session clock"};
+document.getElementById("dl").onclick=()=>{
+ const txt=S.map((s,i)=>`${i}. ${s.t} (${s.m} min) | Lead: ${ld("l"+i)||"-"}\n${ld("n"+i)||"(no notes)"}\n`).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));a.download="harbourline-facilitation-notes.txt";a.click();
+};
+</script>
+</body>
+</html>

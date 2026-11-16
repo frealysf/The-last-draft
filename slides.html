@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbourline Creative: Class Slides</title>
+<style>
+:root{--b1:#0f2b36;--b2:#1b5e72;--a:#5fd0e0;--ink:#fff;--card:rgba(255,255,255,.1);--line:rgba(255,255,255,.25)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(135deg,var(--b1),var(--b2));transition:background .4s;color:var(--ink);font:clamp(15px,1.45vw,24px)/1.4 "Avenir Next","Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+#top{display:flex;justify-content:space-between;align-items:center;padding:12px 4vw 0;min-height:3em}
+#step{background:var(--a);color:#111;font-weight:700;padding:.15em .8em;border-radius:30px}
+#step:empty{display:none}
+#tm{font:700 1.7em Georgia,serif;font-variant-numeric:tabular-nums;cursor:pointer;background:rgba(0,0,0,.25);padding:0 .5em;border-radius:10px}
+#tm:empty{display:none}
+#tm.late{color:#ff8f70}
+#s{flex:1;overflow:auto;padding:1.5vh 5vw;display:flex;flex-direction:column;justify-content:center;max-width:1500px;width:100%;margin:0 auto}
+h1{font:700 clamp(2rem,5.2vw,4.8rem)/1.05 Georgia,"Iowan Old Style",serif;margin:0 0 .4em;max-width:20ch}
+h1.sm{font-size:clamp(1.6rem,3.6vw,3.2rem);max-width:30ch}
+.sub{opacity:.85;margin:0 0 1em;max-width:56ch}
+.how{display:flex;flex-wrap:wrap;gap:.7em;margin:.2em 0 .8em}
+.how div{flex:1 1 15em;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--a);border-radius:12px;padding:.6em .9em}
+.how b{color:var(--a)}
+.out{opacity:.85;margin-top:.8em;font-size:.85em}
+.out strong{color:var(--a)}
+.w{margin-top:.4em}
+.row{display:flex;flex-wrap:wrap;gap:.8em}
+button,input{font:inherit}
+button{cursor:pointer;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:.3em 1em;border-radius:8px}
+button:hover{background:rgba(255,255,255,.2)}
+button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.big{flex:1 1 9em;padding:.8em;font-size:1.3em;font-weight:700;text-align:center;border-radius:14px;border:0;color:#111;background:var(--a)}
+.big:nth-child(2){background:#ffd166}
+.big:nth-child(3){background:#ff9ad5}
+.big:nth-child(4){background:#9be564}
+.big small{display:block;font-size:.6em;font-weight:600;opacity:.8}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(11em,1fr));gap:.7em}
+.col{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--a);border-radius:12px;padding:.5em .6em;min-height:7em}
+.col:nth-child(2){border-top-color:#ffd166}.col:nth-child(3){border-top-color:#ff9ad5}.col:nth-child(4){border-top-color:#9be564}
+.col h3{margin:0 0 .3em;font-size:1em}
+.col input{width:100%;background:rgba(0,0,0,.25);border:1px solid var(--line);color:#fff;padding:.3em .5em;border-radius:6px}
+.it{display:flex;gap:.3em;align-items:center;margin:.3em 0;background:rgba(255,255,255,.14);border-radius:6px;padding:.15em .3em .15em .6em;cursor:pointer}
+.it.x span{text-decoration:line-through;opacity:.5}
+.it span{flex:1}
+.it button{padding:0 .5em;background:transparent;border:0}
+.tl{display:flex;align-items:center;gap:.6em;margin:.35em 0}
+.tl button{flex:0 0 22em;max-width:48%;text-align:left}
+.dots{color:var(--a);letter-spacing:.1em;word-break:break-all}
+.vr{display:flex;flex-wrap:wrap;gap:.4em;align-items:center;margin:.3em 0}
+.vr label{flex:0 0 16em;max-width:100%}
+.vr button{width:2.2em;padding:.2em 0;font-weight:700}
+.vr button.on{background:var(--a);color:#111;border-color:var(--a)}
+.ch{display:flex;flex-wrap:wrap;gap:.5em;align-items:center}
+.ch button{border-radius:30px;font-weight:700;padding:.5em 1.1em;font-size:1.1em}
+.ch .t1{background:#9be564;color:#111}.ch .t2{background:#ff9a52;color:#111}
+.ctl{margin-top:.6em;font-size:.7em;opacity:.8}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.6em;margin-top:.5em}
+.map button{text-align:left;padding:.5em .8em;border-radius:12px;border-left:6px solid var(--a)}
+.map small{display:block;opacity:.75}
+.map b{float:right}
+#pk,#gs{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:9;padding:4vw}
+#pk.on,#gs.on{display:flex}
+#pk>div,#gs>div{background:var(--b1);border:2px solid var(--a);border-radius:18px;padding:1.2em;max-width:34em;width:100%;text-align:center}
+#pk textarea{width:100%;min-height:6em;background:rgba(0,0,0,.3);color:#fff;border:1px solid var(--line);border-radius:8px;padding:.5em;font:inherit}
+#pn{font:700 3em Georgia,serif;margin:.3em 0;min-height:1.2em;color:var(--a)}
+.op{display:block;width:100%;text-align:left;margin:.35em 0;padding:.5em .9em}
+.op.on{border-color:var(--a);background:rgba(255,255,255,.22)}
+.op.ok,.ch .ok{background:#9be564;color:#111;border-color:#9be564}
+.op.no{background:#ff8f70;color:#111;border-color:#ff8f70}
+.why{margin-top:.6em;padding:.5em .8em;border-left:4px solid var(--a);background:rgba(0,0,0,.25);border-radius:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+.gs-i{width:100%;margin:.2em 0;background:rgba(0,0,0,.3);color:#fff;border:1px solid var(--line);border-radius:8px;padding:.35em .6em;font:inherit}
+#gb{display:flex;gap:.6em;justify-content:center;flex-wrap:wrap;padding:6px 4vw;font-size:.8em}
+#gb button{border-radius:30px;padding:.2em 1em}
+#gb b{color:var(--a);font-size:1.2em}
+.lb{display:flex;align-items:center;gap:.7em;margin:.5em 0}
+.lb span{flex:0 0 8em}
+.lb i{display:block;height:2em;border-radius:8px;background:var(--a);min-width:.5em}
+.lb.top i{background:#ffd166}
+.win{margin-top:1em;padding:.8em 1.1em;border:3px solid #ffd166;border-radius:16px;background:rgba(255,209,102,.15);font:700 clamp(1.4rem,3.4vw,3rem)/1.15 Georgia,serif}
+.win small{display:block;font:400 .4em "Avenir Next","Segoe UI",sans-serif;opacity:.9;margin-top:.4em}
+.chips{display:flex;flex-wrap:wrap;gap:.6em;margin:0 0 .8em}
+.chips span{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--a);padding:.35em .9em;border-radius:6px}
+[data-ed]:focus{outline:2px solid var(--a);outline-offset:6px;border-radius:4px}
+.it em{font-style:normal;color:var(--a);font-size:.8em}
+.cols.q{grid-template-columns:1fr 1fr}
+#bar{height:6px;background:rgba(0,0,0,.3)}
+#bar i{display:block;height:100%;background:var(--a);width:0;transition:width .2s}
+#nav{display:flex;justify-content:space-between;align-items:center;padding:8px 4vw;font-size:.7em}
+#nav span{opacity:.75;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="top"><span id="step"></span><span id="tm"></span></div>
+<main id="s" tabindex="-1"></main>
+<div id="bar"><i id="pb"></i></div>
+<div id="nav"><button id="pv">Back</button><span></span><button id="nx">Next</button></div>
+
+<div id="pk" role="dialog" aria-label="Pick a voice"><div><h2 style="margin:0">Pick a voice</h2><p class="sub" style="margin:.3em auto">One name per line. Names are saved on this device only.</p><textarea id="ro" placeholder="Name one&#10;Name two"></textarea><div id="pn" aria-live="polite"></div><button id="go">Pick</button> <button id="cl">Close</button></div></div>
+<div id="gs" role="dialog" aria-label="Groups and scores"><div><h2 style="margin:0">Groups and scoring</h2>
+<p class="sub" style="margin:.3em auto">Number of groups: <button data-gc="2">2</button> <button data-gc="3">3</button> <button data-gc="4">4</button> <button data-gc="5">5</button></p><div id="gl"></div>
+<p class="sub" style="text-align:left;font-size:.8em">Award for reasoning, not speed: +1 cites a case fact · +1 builds on or challenges another group with evidence · +2 best-defended recommendation or answer · +1 per correct bonus round. Use + and − beside each group to award points. Shortcuts: R picks a voice, E exports the class notes.</p>
+<button id="gz">Reset scores</button> <button id="gx">Close</button></div></div>
+<script>
+const OPT=[`Defend with small changes`,`Transparent AI production plus a paid diagnostic trial`,`Outcome-based pricing`,`Low-cost production leader`];
+const D=[
+{ty:`title`,t:`Harbourline Creative`,sub:`BADM 470 case facilitation. Team: Member 1, Member 2, Member 3, Member 4.`},
+{ty:`map`,t:`Our 90 minutes`,sub:`From the evidence to a recommendation we can defend.`},
+{k:`Case check`,m:4,t:`What does Harbourline actually do?`,w:{ty:`board`,key:`c1`,cols:[`Answer`]}},
+{k:`Case check`,m:3,t:`Who are its clients, and what are they buying?`,w:{ty:`board`,key:`c2`,cols:[`Answer`]}},
+{k:`Case check`,m:2,t:`What did the tourism client question?`,w:{ty:`mc`,key:`b1`,opts:[`Whether it needs marketing at all`,`The fee and the six-week timeline`,`Whether the team is local`,`The choice of social platforms`],ans:1,why:`The case shows the client questioning the fee and the timeline.`}},
+{k:`Case check`,m:3,t:`Is each statement supported by the case?`,w:{ty:`tf`,key:`b4`,items:[[`The 15 clients wanting recurring content and the 9 wanting strategic advice are two separate groups.`,0,`Six clients wanted both, so the groups overlap. Check the exact counts against the case.`],[`Five clients have committed to a paid trial and none to an annual renewal.`,1,`This is a case fact and it limits how much we can conclude about demand.`],[`The interviews prove clients will pay a separate advisory fee.`,0,`Interest is not purchasing intent.`]]}},
+{k:`Case check`,m:3,t:`Would you buy Harbourline’s service at its current fee?`,w:{ty:`tally`,key:`poll`,items:[`Yes`,`No`,`Unsure`],big:1}},
+{k:`Performance: numbers`,m:6,t:`What do the numbers tell us about how Harbourline is performing?`,w:{ty:`board`,key:`p1`,cols:[`Answer`]}},
+{k:`Performance: competition and customers`,m:7,t:`What do we know about Harbourline’s competition and its customers?`,w:{ty:`board`,key:`p2`,cols:[`Competition`,`Customers`]}},
+{k:`Performance: external factors`,m:7,t:`Which external factors are shaping Harbourline’s situation?`,w:{ty:`board`,key:`p3`,cols:[`Answer`]}},
+{k:`Internal`,m:7,t:`What does Harbourline do well, and where does it fall short?`,sub:`What could a competitor, or a client using AI, not easily copy?`,w:{ty:`board`,key:`int`,cols:[`Strength`,`Weakness`]}},
+{k:`SWOT`,m:8,t:`Let’s build the full SWOT.`,w:{ty:`quad`,key:`swot`}},
+{k:`SWOT`,m:4,t:`What is the SWOT telling us?`,sub:`Where do strengths meet opportunities? What do the weaknesses and threats expose?`,w:{ty:`board`,key:`swm`,cols:[`Answer`]}},
+{k:`Concerns`,m:4,t:`Which concerns are most serious, and why?`,w:{ty:`board`,key:`con`,cols:[`Answer`]}},
+{k:`Strategic issue`,m:5,t:`What is the central strategic issue Harbourline faces?`,w:{ty:`board`,key:`iss`,cols:[`Answer`]}},
+{k:`Alternatives`,m:8,t:`What could Harbourline do about it?`,w:{ty:`board`,key:`alt`,cols:[`Option`,`Benefit`,`Risk`,`Assumption`]}},
+{k:`Choose`,m:6,t:`Which option would you choose, and what is your evidence?`,w:{ty:`board`,key:`rec`,cols:[`Answer`]}},
+{ty:`txt`,k:`Our recommendation`,m:5,t:`Our recommendation: transparent AI-assisted production plus a paid diagnostic trial.`,sub:`Why: clients value help with judgement and decisions more than volume of content. The interviews show interest in advice but no proof yet of paid demand, so we test it before committing.`,note:`How we would know it works: agree success measures with the five paid-trial clients, name one owner, set clear AI disclosure rules, and set a stop condition at 90 days.`},
+{k:`Challenge`,m:3,t:`What would you challenge in our recommendation?`,w:{ty:`board`,key:`chl`,cols:[`Answer`]}},
+{k:`Close`,m:5,t:`What did we learn?`,w:{ty:`board`,key:`close`,cols:[`Got right`,`Test next`,`Open questions`]}},
+{ty:`lb`,t:`Which group reasoned best?`,sub:`Scores reward evidence and reasoning, not speed.`},
+{ty:`end`,t:`Source and AI use`,sub:`Anderson, L., Buengel, D., & Simpson, J. J. (2025). Strategic management and case analysis: An integrated approach. Virginia Tech Publishing. https://pressbooks.lib.vt.edu/strategicmanagementandcaseanalysis/`,
+ note:`AI (Claude, Anthropic) was used as a support tool to draft these materials. The team reviewed and verified them against the case and Chapter 2. The case-check format was inspired by a shared web page, Harbourline: The Strategy Challenge (meetgoyani5.github.io); the questions here were rewritten from the case facts.`}
+];
+const TH=[[`#0f2b36`,`#1b5e72`,`#5fd0e0`],[`#2b1246`,`#6a2f9a`,`#ffa6dd`],[`#10343a`,`#0f7d6b`,`#7ef0c0`],[`#3a1a10`,`#a1431f`,`#ffc27a`],[`#13264d`,`#2f5fd0`,`#9cc4ff`],[`#38122e`,`#a31f6b`,`#ffb3d9`],[`#1b3a12`,`#4a8f1f`,`#c8f27a`],[`#3a2b10`,`#b0791a`,`#ffe08a`],[`#2b1246`,`#4527a0`,`#d1b3ff`],[`#0f2b36`,`#00838f`,`#80f0ff`],[`#3a1a10`,`#c0392b`,`#ffb199`]];
+const KEY=`hl-slides`;
+let ST={};try{ST=JSON.parse(localStorage.getItem(KEY)||`{}`)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const $=id=>document.getElementById(id),N=D.length;
+const esc=s=>String(s).replace(/&/g,`&amp;`).replace(/</g,`&lt;`);
+const fmt=s=>{const a=Math.abs(s);return(s<0?`+`:``)+Math.floor(a/60)+`:`+String(a%60).padStart(2,`0`)};
+let i=0,iv=null,left=0,run=false,focus=null;
+function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=660;g.gain.value=.15;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.5)}catch(e){}}
+const G=()=>{const g=ST._g=ST._g||{n:[`Group 1`,`Group 2`,`Group 3`,`Group 4`,`Group 5`],p:[0,0,0,0,0],c:4};while(g.n.length<5){g.n.push(`Group `+(g.n.length+1));g.p.push(0)}return g};
+function gbar(){}
+function gset(){const g=G();$(`gl`).innerHTML=g.n.map((x,j)=>j<g.c?`<div class="vr" style="flex-wrap:nowrap"><input class="gs-i" data-gn="${j}" value="${esc(x)}" aria-label="Group ${j+1} name" style="flex:1"><button data-sp="${j}|-1" aria-label="Remove a point">−</button><b style="min-width:2ch;font-size:1.3em">${g.p[j]}</b><button data-sp="${j}|1" aria-label="Add a point">+</button></div>`:``).join(``)}
+function confetti(){if(matchMedia(`(prefers-reduced-motion:reduce)`).matches)return;const c=document.createElement(`canvas`);c.style.cssText=`position:fixed;inset:0;pointer-events:none;z-index:20`;c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);const x=c.getContext(`2d`),cl=[`#ffd166`,`#ff9ad5`,`#9be564`,`#5fd0e0`,`#fff`],P=Array.from({length:160},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,vx:Math.random()*4-2,vy:2+Math.random()*4,s:5+Math.random()*7,c:cl[Math.floor(Math.random()*5)]}));let f=0;(function a(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;x.fillStyle=p.c;x.fillRect(p.x,p.y,p.s,p.s*.6)});if(++f<200)requestAnimationFrame(a);else c.remove()})()}
+const stopT=()=>{clearInterval(iv);iv=null;run=false};
+function widget(w){
+ const k=w.key;
+ if(w.ty===`tally`){
+  const v=ST[k]=ST[k]||w.items.map(()=>0),mx=Math.max(1,...v);
+  const ctl=`<div class="ctl"><button data-clr="${k}">Clear votes</button></div>`;
+  if(w.big)return `<div class="row">${w.items.map((x,j)=>`<button class="big" data-tv="${k}|${j}">${esc(x)}<small>${v[j]} vote${v[j]===1?``:`s`}</small></button>`).join(``)}</div>`+ctl;
+  return w.items.map((x,j)=>`<div class="tl"><button data-tv="${k}|${j}">${esc(x)}</button>${w.dots?`<span class="dots">${`●`.repeat(v[j])}</span>`:`<span style="flex:1;background:rgba(0,0,0,.25);border-radius:6px"><i style="display:block;height:1.1em;border-radius:6px;background:var(--a);width:${v[j]/mx*100}%"></i></span><b>${v[j]}</b>`}</div>`).join(``)+ctl;
+ }
+ if(w.ty===`board`){
+  const g=G(),kg=k+`g`,b=ST[kg]=ST[kg]||[[],[],[],[],[]],cat=w.cols.length>1;ST._c=ST._c||{};while(b.length<5)b.push([]);
+  const cu=ci=>ST._c[k+`|`+ci]===undefined?w.cols[0]:ST._c[k+`|`+ci];
+  return `<div class="cols">${g.n.slice(0,g.c).map((c,ci)=>`<div class="col"><h3>${esc(c)}</h3>${cat?`<select class="gs-i" data-bs="${k}|${ci}" aria-label="Category for ${esc(c)}">${[`No tag`,...w.cols].map((x,xi)=>`<option value="${xi?esc(x):``}"${(xi?x:``)===cu(ci)?` selected`:``}>${esc(x)}</option>`).join(``)}</select>`:``}<input data-bk="${k}|${ci}" placeholder="Add answer" aria-label="Add an answer for ${esc(c)}">${b[ci].map((it,ii)=>`<div class="it ${it.s?`x`:``}" data-bt="${k}|${ci}|${ii}"><span>${it.c?`<em>[${esc(it.c)}]</em> `:``}${esc(it.x)}</span><button data-bc="${k}|${ci}|${ii}" title="Same answer for every group" aria-label="Copy to all groups">⧉</button><button data-bx="${k}|${ci}|${ii}" aria-label="Remove">×</button></div>`).join(``)}</div>`).join(``)}</div><div class="ctl"><button data-clr="${k}">Clear board</button></div>`;
+ }
+ if(w.ty===`quad`){
+  const g=G(),kq=k+`q`,b=ST[kq]=ST[kq]||[[],[],[],[]];ST._qg=ST._qg||0;
+  return `<div class="ctl" style="margin:0 0 .5em">Answering group: <select class="gs-i" data-qs="1" style="width:auto" aria-label="Answering group">${g.n.slice(0,g.c).map((x,j)=>`<option value="${j}"${ST._qg===j?` selected`:``}>${esc(x)}</option>`).join(``)}</select></div><div class="cols q">${[`Strengths`,`Weaknesses`,`Opportunities`,`Threats`].map((c,ci)=>`<div class="col"><h3>${c}</h3><input data-qk="${k}|${ci}" placeholder="Add answer" aria-label="Add to ${c}">${b[ci].map((it,ii)=>`<div class="it ${it.s?`x`:``}" data-qt="${k}|${ci}|${ii}"><span><em>[${esc(g.n[it.g]||``)}]</em> ${esc(it.x)}</span><button data-qx="${k}|${ci}|${ii}" aria-label="Remove">×</button></div>`).join(``)}</div>`).join(``)}</div><div class="ctl"><button data-clr="${k}">Clear board</button></div>`;
+ }
+ if(w.ty===`vrio`){
+  const v=ST[k]=ST[k]||w.items.map(()=>``);
+  return w.items.map((x,j)=>`<div class="vr"><label>${esc(x)}</label>${[`V`,`R`,`I`,`O`].map(L=>`<button class="${v[j].includes(L)?`on`:``}" data-vr="${k}|${j}|${L}">${L}</button>`).join(``)}<b>${v[j].length===4?`Sustained advantage`:v[j].length?`Not yet`:``}</b></div>`).join(``)+`<div class="ctl"><button data-clr="${k}">Clear</button></div>`;
+ }
+ const rv=(v,extra)=>`<div class="ctl"><button data-rv="${k}">${v.r?`Hide answer`:`Reveal answer`}</button> <button data-clr="${k}">Reset</button></div>${v.r&&extra?`<div class="why">${esc(extra)}</div>`:``}`;
+ if(w.ty===`mc`){
+  const v=ST[k]=ST[k]||{s:-1,r:0};
+  return w.opts.map((x,j)=>`<button class="op ${v.r&&j===w.ans?`ok`:v.r&&v.s===j?`no`:v.s===j?`on`:``}" data-mc="${k}|${j}">${String.fromCharCode(65+j)}. ${esc(x)}</button>`).join(``)+rv(v,w.why);
+ }
+ if(w.ty===`tf`){
+  const v=ST[k]=ST[k]||{a:w.items.map(()=>-1),r:0};
+  return w.items.map((x,j)=>`<div class="vr"><label style="flex:1 1 20em">${esc(x[0])}</label>${[1,0].map(b=>`<button style="width:5em" class="${v.a[j]===b?`on`:``} ${v.r&&b===x[1]?`ok`:``}" data-tf="${k}|${j}|${b}">${b?`True`:`False`}</button>`).join(``)}</div>${v.r?`<div class="why">${x[1]?`True`:`False`}: ${esc(x[2])}</div>`:``}`).join(``)+rv(v);
+ }
+ if(w.ty===`match`){
+  const v=ST[k]=ST[k]||{s:-1,m:w.left.map(()=>-1),r:0};
+  return `<div class="two"><div>${w.left.map((x,j)=>`<button class="op ${v.s===j?`on`:``} ${v.r?(v.m[j]===w.ans[j]?`ok`:`no`):``}" data-ml="${k}|${j}">${j+1}. ${esc(x)}${v.m[j]>=0?` → ${String.fromCharCode(65+v.m[j])}`:``}</button>`).join(``)}</div><div>${w.right.map((x,j)=>`<button class="op" data-mr="${k}|${j}">${String.fromCharCode(65+j)}. ${esc(x)}${v.m.map((m,i)=>m===j?` (${i+1})`:``).join(``)}</button>`).join(``)}</div></div>`+rv(v,w.why);
+ }
+ if(w.ty===`rank`){
+  const v=ST[k]=ST[k]||{o:w.items.map((x,j)=>j),r:0};
+  return v.o.map((it,p)=>`<div class="vr"><b>${p+1}</b><button data-ru="${k}|${p}|-1" aria-label="Move up">▲</button><button data-ru="${k}|${p}|1" aria-label="Move down">▼</button><label style="flex:1 1 20em">${esc(w.items[it])}</label>${v.r?`<b>Suggested #${w.sug.indexOf(it)+1}</b>`:``}</div>`).join(``)+rv(v,w.why);
+ }
+ if(w.ty===`trace`){
+  const v=ST[k]=ST[k]||w.items.map(()=>0);
+  return `<div class="ch">${w.items.map((x,j)=>`<button class="${[``,`t1`,`t2`][v[j]]}" data-tr="${k}|${j}">${esc(x)}${[``,` ✓`,` gap`][v[j]]}</button>`).join(`<b aria-hidden="true">›</b>`)}</div><div class="ctl"><button data-clr="${k}">Clear</button></div>`;
+ }
+ return ``;
+}
+const E=(f,tag,c,t)=>{const v=(ST._t||{})[i+`|`+f];return `<${tag}${c?` class="${c}"`:``} contenteditable="true" spellcheck="false" data-ed="${i}|${f}">${esc(v!==undefined?v:t)}</${tag}>`};
+function draw(){
+ const d=D[i];let h=``;
+ if(d.ty===`lb`){const g=G(),r=g.n.slice(0,g.c).map((x,j)=>[x,g.p[j]]).sort((a,b)=>b[1]-a[1]),mx=Math.max(1,r[0][1]);h=`${E(`t`,`h1`,``,d.t)}${E(`s`,`p`,`sub`,d.sub)}${r.map((x,j)=>`<div class="lb ${x[1]===r[0][1]&&x[1]>0?`top`:``}"><span>${esc(x[0])}</span><i style="width:${x[1]/mx*60}%"></i><b>${x[1]}</b></div>`).join(``)}${ST._w?(r[0][1]===0?`<div class="win">No points yet</div>`:`<div class="win">${r.filter(x=>x[1]===r[0][1]).length>1?`It’s a tie: ${r.filter(x=>x[1]===r[0][1]).map(x=>esc(x[0])).join(` and `)}`:`${esc(r[0][0])} wins`} with ${r[0][1]} points<small>Congratulations. Now tell us what made the reasoning strong.</small></div>`):`<p><button data-win="1" style="font-size:1.2em;padding:.5em 1.4em">Reveal the winner</button></p>`}`}
+ else if(d.ty===`map`){h=`${E(`t`,`h1`,``,d.t)}${E(`s`,`p`,`sub`,d.sub)}<div class="map">${D.map((x,j)=>x.m?`<button data-go="${j}"><b>${x.m} min</b>${esc(x.k)}<small>${esc(x.t.length>46?x.t.slice(0,44)+`…`:x.t)}</small></button>`:``).join(``)}</div>`}
+ else if(d.ty){h=`${E(`t`,`h1`,d.ty===`txt`?`sm`:``,d.t)}${E(`s`,`p`,`sub`,d.sub)}${d.note?`${E(`n`,`p`,`sub`,d.note)}`:``}`}
+ else{
+  h=`${E(`t`,`h1`,`sm`,d.t)}${d.sub?E(`s`,`p`,`sub`,d.sub):``}${d.chips?`<div class="chips">${d.chips.map(x=>`<span>${esc(x)}</span>`).join(``)}</div>`:``}<div class="w">${widget(d.w)}</div>`;
+ }
+ $(`s`).innerHTML=h;
+ if(focus){const e=document.querySelector(`[data-bk="${focus}"],[data-qk="${focus}"]`);if(e)e.focus()}
+}
+function show(n){
+ i=Math.max(0,Math.min(N-1,n));stopT();focus=null;
+ const d=D[i],t=TH[i%TH.length],r=document.documentElement.style;
+ r.setProperty(`--b1`,t[0]);r.setProperty(`--b2`,t[1]);r.setProperty(`--a`,t[2]);
+ left=(d.m||0)*60;$(`tm`).textContent=d.m?fmt(left):``;$(`tm`).className=``;
+ $(`step`).textContent=d.k||``;
+ $(`pb`).style.width=((i+1)/N*100)+`%`;
+ $(`pv`).disabled=i===0;$(`nx`).disabled=i===N-1;
+ draw();
+ try{history.replaceState(null,``,`#s`+i)}catch(e){}
+}
+function toggleT(){
+ if(!D[i].m)return;
+ if(run){stopT();return}
+ run=true;
+ const tick=()=>{if(left===0)beep();$(`tm`).textContent=fmt(left);$(`tm`).className=left<0?`late`:``;left--};
+ tick();iv=setInterval(tick,1000);
+}
+$(`s`).addEventListener(`click`,e=>{
+ const g=a=>{const el=e.target.closest(`[${a}]`);return el?el.getAttribute(a).split(`|`):null};
+ let p;
+ if(p=g(`data-go`)){show(+p[0]);return}
+ else if(p=g(`data-win`)){ST._w=1;confetti()}
+ else if(p=g(`data-clr`)){const k=p[0];delete ST[k];delete ST[k+`g`];delete ST[k+`q`];focus=null}
+ else if(p=g(`data-tv`)){const v=ST[p[0]];v[+p[1]]=Math.max(0,v[+p[1]]+(e.shiftKey?-1:1))}
+ else if(p=g(`data-bc`)){const gg=G(),b=ST[p[0]+`g`],it=b[+p[1]][+p[2]];for(let j=0;j<gg.c;j++){if(j!==+p[1]&&!b[j].some(o=>o.x===it.x&&o.c===it.c))b[j].push({x:it.x,s:0,c:it.c})}}
+ else if(p=g(`data-qt`)){const it=ST[p[0]+`q`][+p[1]][+p[2]];it.s=!it.s}
+ else if(p=g(`data-qx`)){ST[p[0]+`q`][+p[1]].splice(+p[2],1);focus=p[0]+`|`+p[1]}
+ else if(p=g(`data-bx`)){ST[p[0]+`g`][+p[1]].splice(+p[2],1);focus=p[0]+`|`+p[1]}
+ else if(p=g(`data-bt`)){const it=ST[p[0]+`g`][+p[1]][+p[2]];it.s=!it.s}
+ else if(p=g(`data-vr`)){const v=ST[p[0]],j=+p[1];v[j]=v[j].includes(p[2])?v[j].replace(p[2],``):v[j]+p[2]}
+ else if(p=g(`data-mc`)){const v=ST[p[0]];if(!v.r)v.s=+p[1]}
+ else if(p=g(`data-rv`)){const v=ST[p[0]];v.r=v.r?0:1}
+ else if(p=g(`data-tf`)){const v=ST[p[0]];if(!v.r)v.a[+p[1]]=+p[2]}
+ else if(p=g(`data-ml`)){const v=ST[p[0]];if(!v.r)v.s=+p[1]}
+ else if(p=g(`data-mr`)){const v=ST[p[0]];if(!v.r&&v.s>=0){v.m[v.s]=+p[1];v.s=-1}}
+ else if(p=g(`data-ru`)){const v=ST[p[0]],a=+p[1],b=a+ +p[2];if(!v.r&&b>=0&&b<v.o.length)[v.o[a],v.o[b]]=[v.o[b],v.o[a]]}
+ else if(p=g(`data-tr`)){const v=ST[p[0]];v[+p[1]]=(v[+p[1]]+1)%3}
+ else return;
+ save();draw();
+});
+document.addEventListener(`keydown`,e=>{
+ const t=e.target;
+ if(e.key===`Escape`){$(`pk`).classList.remove(`on`);$(`gs`).classList.remove(`on`)}
+ if(t.isContentEditable){if(e.key===`Enter`){e.preventDefault();t.blur()}return}
+ if(t.tagName===`TEXTAREA`)return;
+ if(t.tagName===`INPUT`){
+  if(e.key===`Enter`&&t.dataset.qk&&t.value.trim()){const p=t.dataset.qk.split(`|`);ST[p[0]+`q`][+p[1]].push({x:t.value.trim(),s:0,g:ST._qg||0});focus=t.dataset.qk;save();draw()}
+  if(e.key===`Enter`&&t.dataset.bk&&t.value.trim()){const p=t.dataset.bk.split(`|`),sel=t.parentElement.querySelector(`select`);ST[p[0]+`g`][+p[1]].push({x:t.value.trim(),s:0,c:sel?sel.value:``});focus=t.dataset.bk;save();draw()}
+  return;
+ }
+ if(e.key===`ArrowRight`||e.key===` `&&t.tagName!==`BUTTON`||e.key===`PageDown`){e.preventDefault();show(i+1)}
+ else if(e.key===`ArrowLeft`||e.key===`PageUp`){e.preventDefault();show(i-1)}
+ else if(e.key===`t`||e.key===`T`)toggleT();
+ else if(e.key===`r`||e.key===`R`)openPk();
+ else if(e.key===`g`||e.key===`G`)openGs();
+ else if(e.key===`e`||e.key===`E`)exp();
+ else if(e.key===`f`||e.key===`F`){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+});
+$(`gs`).addEventListener(`click`,e=>{const sp=e.target.closest(`[data-sp]`);if(sp){const q=sp.dataset.sp.split(`|`),g=G();g.p[+q[0]]=Math.max(0,g.p[+q[0]]+ +q[1]);save();gset();if(D[i].ty===`lb`)draw();return}const c=e.target.closest(`[data-gc]`);if(c){G().c=+c.dataset.gc;save();gset();gbar()}});
+$(`s`).addEventListener(`change`,e=>{const t=e.target;if(t.dataset.bs){ST._c=ST._c||{};ST._c[t.dataset.bs]=t.value;save()}if(t.dataset.qs){ST._qg=+t.value;save()}});
+$(`s`).addEventListener(`focusout`,e=>{const t=e.target;if(t.dataset&&t.dataset.ed){ST._t=ST._t||{};ST._t[t.dataset.ed]=t.textContent;save()}});
+$(`gs`).addEventListener(`input`,e=>{const t=e.target;if(t.dataset.gn!==undefined){G().n[+t.dataset.gn]=t.value;save();gbar()}});
+$(`gz`).onclick=()=>{G().p=G().p.map(()=>0);ST._w=0;save();gbar();draw()};
+$(`gx`).onclick=()=>$(`gs`).classList.remove(`on`);
+function openGs(){gset();$(`gs`).classList.add(`on`)}
+gbar();
+function openPk(){$(`ro`).value=ST._r||``;$(`pn`).textContent=``;$(`pk`).classList.add(`on`)}
+$(`ro`).oninput=()=>{ST._r=$(`ro`).value;save()};
+$(`go`).onclick=()=>{const n=$(`ro`).value.split(`\n`).map(x=>x.trim()).filter(Boolean);if(!n.length){$(`pn`).textContent=`Add names first`;return}
+ let c=0;const iv2=setInterval(()=>{$(`pn`).textContent=n[Math.floor(Math.random()*n.length)];if(++c>14){clearInterval(iv2)}},70)};
+$(`cl`).onclick=()=>$(`pk`).classList.remove(`on`);
+function exp(){
+ const g=G();let o=`Harbourline Creative class output\n\nScores: `+g.n.slice(0,g.c).map((x,j)=>x+` `+g.p[j]).join(`, `)+`\n\n`;
+ D.forEach(d=>{const w=d.w;if(!w||!(ST[w.key]||ST[w.key+`g`]||ST[w.key+`q`])||[`mc`,`tf`,`match`,`rank`].includes(w.ty))return;const v=ST[w.key]||ST[w.key+`g`]||ST[w.key+`q`];o+=`## ${d.k}: ${d.t}\n`;
+  if(w.ty===`quad`)[`Strengths`,`Weaknesses`,`Opportunities`,`Threats`].forEach((c,j)=>{o+=`${c}:\n`+v[j].map(it=>`  - ${it.s?`[struck] `:``}${it.x} (${g.n[it.g]})`).join(`\n`)+`\n`});
+  else if(w.ty===`board`)g.n.slice(0,g.c).forEach((c,j)=>{o+=`${c}:\n`+v[j].map(it=>`  - ${it.s?`[struck] `:``}${it.c?`[`+it.c+`] `:``}${it.x}`).join(`\n`)+`\n`});
+  else if(w.ty===`tally`)w.items.forEach((x,j)=>{o+=`  ${x}: ${v[j]}\n`});
+  else if(w.ty===`vrio`)w.items.forEach((x,j)=>{o+=`  ${x}: ${v[j]||`-`}\n`});
+  else w.items.forEach((x,j)=>{o+=`  ${x}: ${[`untouched`,`logic holds`,`gap`][v[j]]}\n`});
+  o+=`\n`});
+ const a=document.createElement(`a`);a.href=URL.createObjectURL(new Blob([o],{type:`text/plain`}));a.download=`harbourline-class-output.txt`;a.click()}
+$(`pv`).onclick=()=>show(i-1);$(`nx`).onclick=()=>show(i+1);$(`tm`).onclick=toggleT;
+const m=/^#s(\d+)$/.exec(location.hash);
+show(m?+m[1]:0);
+</script>
+</body>
+</html>
